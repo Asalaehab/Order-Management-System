@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using Peristance.DbContexts;
+
 namespace OrderManagementSystem.web
 {
     public class Program
@@ -13,6 +16,11 @@ namespace OrderManagementSystem.web
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddDbContext<OrderManagementSystemDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            
+            });
 
             var app = builder.Build();
 
