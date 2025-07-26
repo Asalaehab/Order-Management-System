@@ -1,0 +1,6 @@
+@OrderManagementSystem.web_HostAddress = http://localhost:5287
+
+GET {{OrderManagementSystem.web_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
