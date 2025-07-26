@@ -14,12 +14,17 @@ namespace Peristance.DbContexts
         {
             
         }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Product> Products { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AssemblyRefernce).Assembly);
         }
-        public DbSet<Customer> Customers { get; set; }
     }
 }
