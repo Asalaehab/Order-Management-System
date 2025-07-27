@@ -30,14 +30,13 @@ namespace Service
 
         public IEnumerable<ProductDto> GetAllProducts()
         {
-            var products = _unitOfWork.GetRepository<ProductDto>().GetAll();
-            return products;
-
+            var products = _unitOfWork.GetRepository<Product>().GetAll();
+            return _mapper.Map<IEnumerable<Product>,IEnumerable<ProductDto>>(products);
         }
 
         public ProductDto GetProductById(int id)
         {
-            var Product = _unitOfWork.GetRepository<ProductDto>().GetById(id);
+            var Product = _unitOfWork.GetRepository<Product>().GetById(id);
             if (Product is null)
             {
                 throw new NotImplementedException();//
@@ -51,6 +50,8 @@ namespace Service
             _unitOfWork.GetRepository<Product>().Update(product);
             _unitOfWork.SaveChanges();
             return _mapper.Map<ProductDto>(product);
+
+
         }
     }
 }
