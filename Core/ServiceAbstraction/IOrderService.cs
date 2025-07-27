@@ -19,6 +19,6 @@ namespace ServiceAbstraction
         void CreateOrder(OrderDto order);
 
         //Update Order details 
-        void UpdateOrder(int OrderId,string status);
+        bool UpdateOrder(int OrderId,string status);
     }
 }

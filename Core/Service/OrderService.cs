@@ -92,21 +92,23 @@ namespace Service
          
         }
 
-        public void UpdateOrder(int OrderId, string status)
+        public bool UpdateOrder(int OrderId, string status)
         {
             var order = _unitOfWork.GetRepository<Order>().GetById(OrderId);
            
             if (order is null)
             {
-                //throw Exception
-                throw new Exception();
+              
+                return false;
             }
             if (!Enum.TryParse<OrderStatus>(status, true, out var parsedStatus))
             {
-                throw new Exception();
+               
+                return false;
             }
             order.Status = parsedStatus;
             _unitOfWork.SaveChanges();
+            return true;
 
         }
     }
