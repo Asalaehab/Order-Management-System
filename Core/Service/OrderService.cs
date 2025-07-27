@@ -15,45 +15,45 @@ namespace Service
     public class OrderService(IUnitOfWork _unitOfWork,IMapper _mapper) : IOrderService
     {
 
-        bool validateOrder(Order order)
-        {
-            decimal totalAmount = 0;
-            foreach (var item in order.OrderItems)
-            {
-                var product = _unitOfWork.GetRepository<Product>().GetById(item.ProductId);
+        //bool validateOrder(Order order)
+        //{
+        //    decimal totalAmount = 0;
+        //    foreach (var item in order.OrderItems)
+        //    {
+        //        var product = _unitOfWork.GetRepository<Product>().GetById(item.ProductId);
 
-                if (product is  null)
-                {
-                    //throw Exception
-                    return false;
-                }
-                if (product.Stock < item.Quantity)
-                {
-                    var Amount= item.Quantity*item.UnitPrice*(1-item.discount);
-                    totalAmount += Amount;
-                }
-                else
-                {
-                    //throw exception
-                    return false;
-                }
+        //        if (product is  null)
+        //        {
+        //            //throw Exception
+        //            return false;
+        //        }
+        //        if (product.Stock < item.Quantity)
+        //        {
+        //            var Amount= item.Quantity*item.UnitPrice*(1-item.discount);
+        //            totalAmount += Amount;
+        //        }
+        //        else
+        //        {
+        //            //throw exception
+        //            return false;
+        //        }
 
-            }
-            if(totalAmount > 200)
-            {
-                order.TotalAmount = totalAmount * 0.90m;
-            }
-            else if(totalAmount > 100)
-            {
-                order.TotalAmount = totalAmount * 0.95m;
-            }
-            else
-            {
-                order.TotalAmount = totalAmount;
-            }
+        //    }
+        //    if(totalAmount > 200)
+        //    {
+        //        order.TotalAmount = totalAmount * 0.90m;
+        //    }
+        //    else if(totalAmount > 100)
+        //    {
+        //        order.TotalAmount = totalAmount * 0.95m;
+        //    }
+        //    else
+        //    {
+        //        order.TotalAmount = totalAmount;
+        //    }
 
-                return true;
-        }
+        //        return true;
+        //}
 
 
 
@@ -63,10 +63,10 @@ namespace Service
         public void CreateOrder(OrderDto order)
         {
            var OrderToCreate=_mapper.Map<OrderDto,Order>(order);
-            if (!validateOrder(OrderToCreate))
-            {
-                //throw Excetion Order Cannot be created
-            }
+            //if (!validateOrder(OrderToCreate))
+            //{
+            //    //throw Excetion Order Cannot be created
+            //}
         }
 
         public IEnumerable<OrderDto> GetAllOrders()

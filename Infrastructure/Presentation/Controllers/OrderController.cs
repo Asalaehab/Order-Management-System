@@ -1,4 +1,6 @@
-﻿using ServiceAbstraction;
+﻿using Microsoft.AspNetCore.Mvc;
+using ServiceAbstraction;
+using Shared.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,17 @@ using System.Threading.Tasks;
 
 namespace Presentation.Controllers
 {
-    public class OrderController(IServiceManger _serviceManger) 
+    [ApiController]
+    [Route("api/[Controller]")]
+    public class OrderController(IServiceManger _serviceManger) :ControllerBase
     {
+        //GetAllOrders
+        [HttpGet()]
+        //Get BaseUrl/api/Orders
+        public ActionResult<IEnumerable<OrderDto>> GetAllOrders() 
+        { 
+            var Orders=_serviceManger.OrderService.GetAllOrders();
+            return Ok(Orders);
+        }
     }
 }

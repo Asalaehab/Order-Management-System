@@ -14,9 +14,11 @@ namespace Service.MappingProfiles
         public OrderProfile()
         {
             CreateMap<OrderItem, OrderItemDto>();
-            CreateMap<Order,OrderDto>()
-                .ForMember(dist=>dist.Status,options=>options.MapFrom(src=>src.Status))
-                .ForMember(dist=>dist.OrderItems,options=>options.MapFrom(src=>src.OrderItems));
+            CreateMap<Order, OrderDto>()
+                .ForMember(dist => dist.Status, options => options.MapFrom(src => src.Status.ToString()))
+                .ForMember(dist => dist.OrderItems, options => options.MapFrom(src => src.OrderItems));
+            CreateMap<OrderDto, OrderDto>();
+            CreateMap<OrderItemDto, OrderDto>();
         }
     }
 }

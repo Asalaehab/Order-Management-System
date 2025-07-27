@@ -14,7 +14,7 @@ namespace Shared.DataTransferObjects
 
         public DateTime OrderDate { get; set; }
 
-        public int TotalAmount { get; set; }
+        public decimal TotalAmount { get; set; }
 
 
         public string PaymentMethod { get; set; } = null!;

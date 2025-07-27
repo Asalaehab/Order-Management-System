@@ -1,9 +1,13 @@
 
 using DomainLayer.Contracts;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Peristance.Data.Repositories;
 using Peristance.DbContexts;
 using Service;
+using Service.MappingProfiles;
+using AutoMapper;
+
 using ServiceAbstraction;
 
 namespace OrderManagementSystem.web
@@ -27,6 +31,8 @@ namespace OrderManagementSystem.web
             });
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IServiceManger, ServiceManger>();
+            //builder.Services.AddScoped<IMapper, Mapper>();
+            builder.Services.AddAutoMapper(cfg => { },typeof(AssemblyRef).Assembly);
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -15,11 +15,9 @@ namespace DomainLayer.Models
         public DateTime OrderDate { get; set; }
 
         public decimal TotalAmount { get; set; }
-
-        public ICollection<OrderItem> OrderItems { get; set; } = new HashSet<OrderItem>();
-
+        public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
         public string PaymentMethod { get; set; } = null!;
 
-        public  OrderStatus Status { get; set; }
+        public OrderStatus Status { get; set; }
     }
 }
