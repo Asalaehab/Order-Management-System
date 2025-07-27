@@ -9,6 +9,7 @@ using Service.MappingProfiles;
 using AutoMapper;
 
 using ServiceAbstraction;
+using Peristance.Identity;
 
 namespace OrderManagementSystem.web
 {
@@ -28,6 +29,12 @@ namespace OrderManagementSystem.web
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             
+            });
+
+            builder.Services.AddDbContext<OrderSystemIdentityDbcontext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection"));
+
             });
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IServiceManger, ServiceManger>();
