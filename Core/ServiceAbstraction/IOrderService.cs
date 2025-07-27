@@ -16,7 +16,7 @@ namespace ServiceAbstraction
         OrderDto GetOrder(int id);
 
         //- Add a new Order 
-        void CreateOrder(OrderDto order);
+        InvoiceDto CreateOrder(OrderDto order);
 
         //Update Order details 
         bool UpdateOrder(int OrderId,string status);

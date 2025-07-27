@@ -60,25 +60,29 @@ namespace Service
             return true;
         }
 
-
-
-
-
-
-        public void CreateOrder(OrderDto order)
+        public InvoiceDto CreateOrder(OrderDto order)
         {
-           var orderToCreate = _mapper.Map<OrderDto,Order>(order);
+            var orderToCreate = _mapper.Map<OrderDto, Order>(order);
             if (!validateOrder(orderToCreate))
             {
                 //throw Excetion Order Cannot be created
             }
-            else
+
+            var finalOrder = _mapper.Map<Order>(orderToCreate);
+            finalOrder.TotalAmount = orderToCreate.TotalAmount;
+            _unitOfWork.GetRepository<Order>().Add(finalOrder);
+            _unitOfWork.SaveChanges();
+
+            var Invoice = new Invoice()
             {
-                var finalOrder = _mapper.Map<Order>(orderToCreate);
-                finalOrder.TotalAmount = orderToCreate.TotalAmount; 
-                _unitOfWork.GetRepository<Order>().Add(finalOrder);
-                _unitOfWork.SaveChanges();
-            }
+                OrderId = finalOrder.OrderId,
+                InvoiceDate = DateTime.Now,
+                TotalAmount = finalOrder.TotalAmount
+            };
+            _unitOfWork.GetRepository<Invoice>().Add(Invoice);
+            _unitOfWork.SaveChanges();
+            return _mapper.Map<InvoiceDto>(Invoice);
+
         }
 
         public IEnumerable<OrderDto> GetAllOrders()

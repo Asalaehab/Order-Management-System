@@ -23,10 +23,10 @@ namespace Presentation.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateOrder([FromBody]OrderDto orderDto)
+        public ActionResult<InvoiceDto> CreateOrder([FromBody]OrderDto orderDto)
         {
-            _serviceManger.OrderService.CreateOrder(orderDto);
-            return Ok();
+           var Invoic= _serviceManger.OrderService.CreateOrder(orderDto);
+            return Ok(Invoic);
         }
 
         [HttpGet("{id}")]
