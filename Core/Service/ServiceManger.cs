@@ -21,5 +21,10 @@ namespace Service
         private readonly Lazy<IProductService> _productService = new Lazy<IProductService>(() => new ProductService(_unitOfWork, _mapper));
 
         public IProductService ProductService =>_productService.Value;
+       
+        
+        private readonly Lazy<IInvoiceService> _InvoiceService = new Lazy<IInvoiceService>(() => new InvoiceService(_unitOfWork, _mapper));
+
+        public IInvoiceService InvoiceService => _InvoiceService.Value;
     }
 }
