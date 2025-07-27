@@ -3,6 +3,7 @@ using DomainLayer.Contracts;
 using DomainLayer.Models;
 using DomainLayer.Models.Enums;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Service.Specifications;
 using ServiceAbstraction;
 using Shared.DataTransferObjects;
 using System;
@@ -72,14 +73,16 @@ namespace Service
 
         public IEnumerable<OrderDto> GetAllOrders()
         {
-            var Orders=_unitOfWork.GetRepository<Order>().GetAll();
+            var specifications = new OrderWithOrderItemsspecifications();
+            var Orders=_unitOfWork.GetRepository<Order>().GetAll(specifications);
             var OrdersDto=_mapper.Map<IEnumerable<Order>,IEnumerable<OrderDto>>(Orders);
             return OrdersDto;
         }
 
         public OrderDto GetOrder(int id)
         {
-            var Order = _unitOfWork.GetRepository<Order>().GetById(id);
+            var specifications=new OrderWithOrderItemsspecifications(id);
+            var Order = _unitOfWork.GetRepository<Order>().GetById(specifications);
             if (Order is null)
             {
                 //throw Exception

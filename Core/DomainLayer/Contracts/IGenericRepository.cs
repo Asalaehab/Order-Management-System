@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Contracts
 {
-    public interface IGenericRepository<TEntity>
+    public interface IGenericRepository<TEntity> where TEntity : class
     {
         public void Add(TEntity entity);
 
@@ -17,6 +17,13 @@ namespace DomainLayer.Contracts
         public IEnumerable<TEntity> GetAll();
 
         public TEntity? GetById(int id);
+
+        #region specifiactions
+
+        public IEnumerable<TEntity> GetAll(ISpecifications<TEntity> specifications);
+
+        public TEntity? GetById( ISpecifications<TEntity> specifications); 
+        #endregion
 
     }
 }

@@ -21,11 +21,28 @@ namespace Peristance.Data.Repositories
            return _dbContext.Set<TEntity>().ToList();
         }
 
+
         public TEntity? GetById(int id)
         {
             return _dbContext.Set<TEntity>().Find(id);
         }
-        public void Update(TEntity entity)=> _dbContext.Update(entity!);
-       
+
+        public void Update(TEntity entity) => _dbContext.Update(entity!);
+
+
+        #region WithSpecifications
+        public TEntity? GetById(ISpecifications<TEntity> specifications)
+        {
+            //_dbContext.Set<TEntity>().Where
+           return specificationEvalutor.CreateQuery(_dbContext.Set<TEntity>(),specifications).FirstOrDefault();
+
+        }
+
+        public IEnumerable<TEntity> GetAll(ISpecifications<TEntity> specifications)
+        {
+            return specificationEvalutor.CreateQuery(_dbContext.Set<TEntity>(), specifications).ToList();
+        } 
+        #endregion
+
     }
 }
