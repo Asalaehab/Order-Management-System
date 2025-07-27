@@ -19,5 +19,6 @@ namespace DomainLayer.Models
         public int UnitPrice { get; set; }
 
         public decimal discount { get; set; }
+
     }
 }

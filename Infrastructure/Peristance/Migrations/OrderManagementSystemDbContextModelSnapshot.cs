@@ -3,20 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Peristance.DbContexts;
 
 #nullable disable
 
-namespace Peristance.Data.Migrations
+namespace Peristance.Migrations
 {
     [DbContext(typeof(OrderManagementSystemDbContext))]
-    [Migration("20250726223531_EntitiesCreate")]
-    partial class EntitiesCreate
+    partial class OrderManagementSystemDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,17 +77,16 @@ namespace Peristance.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("OrderDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
-                    b.Property<string>("PaymentMethod")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PaymentMethod")
+                        .HasColumnType("int");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int>("TotalAmount")
-                        .HasColumnType("int");
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("OrderId");
 
@@ -106,7 +102,7 @@ namespace Peristance.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderItemId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderItemId"), 10L, 10);
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
@@ -125,8 +121,7 @@ namespace Peristance.Data.Migrations
 
                     b.HasKey("OrderItemId");
 
-                    b.HasIndex("OrderId")
-                        .IsUnique();
+                    b.HasIndex("OrderId");
 
                     b.ToTable("OrderItems");
                 });
@@ -137,18 +132,17 @@ namespace Peristance.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"), 100L, 100);
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Stock")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
 
                     b.HasKey("ProductId");
 
@@ -167,8 +161,8 @@ namespace Peristance.Data.Migrations
             modelBuilder.Entity("DomainLayer.Models.OrderItem", b =>
                 {
                     b.HasOne("DomainLayer.Models.Order", null)
-                        .WithOne("OrderItems")
-                        .HasForeignKey("DomainLayer.Models.OrderItem", "OrderId")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -181,8 +175,7 @@ namespace Peristance.Data.Migrations
 
             modelBuilder.Entity("DomainLayer.Models.Order", b =>
                 {
-                    b.Navigation("OrderItems")
-                        .IsRequired();
+                    b.Navigation("OrderItems");
                 });
 #pragma warning restore 612, 618
         }

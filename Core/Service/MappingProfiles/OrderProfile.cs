@@ -16,7 +16,10 @@ namespace Service.MappingProfiles
             CreateMap<OrderItem, OrderItemDto>();
             CreateMap<Order, OrderDto>()
                 .ForMember(dist => dist.Status, options => options.MapFrom(src => src.Status.ToString()))
-                .ForMember(dist => dist.OrderItems, options => options.MapFrom(src => src.OrderItems));
+                .ForMember(dest => dest.OrderDate, opt => opt.MapFrom(src => DateOnly.FromDateTime(src.OrderDate)))
+                .ForMember(dist => dist.OrderItems, options => options.MapFrom(src => src.OrderItems))
+                .ForMember(dist => dist.PaymentMethod, options => options.MapFrom(src => src.PaymentMethod.ToString()))
+                ;
             CreateMap<OrderDto, OrderDto>();
             CreateMap<OrderItemDto, OrderDto>();
         }

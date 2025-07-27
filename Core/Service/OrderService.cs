@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DomainLayer.Contracts;
 using DomainLayer.Models;
+using DomainLayer.Models.Enums;
 using Microsoft.EntityFrameworkCore.Metadata;
 using ServiceAbstraction;
 using Shared.DataTransferObjects;

@@ -9,17 +9,15 @@ using System.Threading.Tasks;
 
 namespace Peristance.Data.Configrations
 {
-    public class OrderConfigrations : IEntityTypeConfiguration<Order>
+    internal class OrderItemConfigrations : IEntityTypeConfiguration<OrderItem>
     {
-        public void Configure(EntityTypeBuilder<Order> builder)
+        public void Configure(EntityTypeBuilder<OrderItem> builder)
         {
-            builder.Property(O => O.OrderDate)
-                .HasColumnType("datetime")
-                ;
+            //throw new NotImplementedException();
+            builder.Property(OI => OI.OrderItemId)
+                .UseIdentityColumn(10, 10);
 
-           
-                
-                
+         
         }
     }
 }
