@@ -104,7 +104,7 @@ namespace Service
               
                 return false;
             }
-            if (!Enum.TryParse<OrderStatus>(status, true, out var parsedStatus))
+            if (!Enum.TryParse<OrderStatus>(status.ToLower(), true, out var parsedStatus))
             {
                
                 return false;
