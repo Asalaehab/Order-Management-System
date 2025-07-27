@@ -3,6 +3,8 @@ using DomainLayer.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Peristance.Data.Repositories;
 using Peristance.DbContexts;
+using Service;
+using ServiceAbstraction;
 
 namespace OrderManagementSystem.web
 {
@@ -24,6 +26,7 @@ namespace OrderManagementSystem.web
             
             });
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<IServiceManger, ServiceManger>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

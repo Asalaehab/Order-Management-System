@@ -8,5 +8,6 @@ namespace ServiceAbstraction
 {
     public interface IServiceManger
     {
+        public IOrderService OrderService { get;  }
     }
 }
