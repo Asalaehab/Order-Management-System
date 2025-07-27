@@ -13,5 +13,9 @@ namespace Service
     {
         private readonly Lazy<IOrderService> _LazyOrderservice=new Lazy<IOrderService>(()=>new OrderService(_unitOfWork,_mapper));
         public IOrderService OrderService => _LazyOrderservice.Value;
+
+
+        private readonly Lazy<ICustomerService> _CustomerService=new Lazy<ICustomerService>(()=>new CustomerService(_unitOfWork,_mapper));
+        public ICustomerService CustomerService => _CustomerService.Value;
     }
 }

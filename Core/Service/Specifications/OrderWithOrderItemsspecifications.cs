@@ -11,7 +11,6 @@ namespace Service.Specifications
     internal class OrderWithOrderItemsspecifications : BaseSpecification<Order>
     {
         //Get All Orders
-      
         public OrderWithOrderItemsspecifications() : base(null)
         {
             AddInclude(o => o.OrderItems);
