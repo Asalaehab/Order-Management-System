@@ -15,6 +15,6 @@ namespace DomainLayer.Models
         [EmailAddress]
         public string Email { get; set; } = null!;
 
-        public Order Orders { get; set; } = null!;
+        public ICollection<Order>Orders { get; set; } = new HashSet<Order>();
     }
 }
