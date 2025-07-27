@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomainLayer.Models
+namespace Shared.DataTransferObjects
 {
-    public class Order
+    public class OrderDto
     {
         public int OrderId { get; set; }
 
@@ -16,10 +16,11 @@ namespace DomainLayer.Models
 
         public int TotalAmount { get; set; }
 
-        public ICollection<OrderItem> OrderItems { get; set; } = new HashSet<OrderItem>();
 
         public string PaymentMethod { get; set; } = null!;
+        public string Status { get; set; }=default!;
 
-        public  OrderStatus Status { get; set; }
+        public List<OrderItemDto> OrderItems { get; set; } = [];
+
     }
 }
