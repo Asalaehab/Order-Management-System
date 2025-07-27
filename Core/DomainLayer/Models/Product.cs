@@ -14,6 +14,6 @@ namespace DomainLayer.Models
 
         public decimal Price { get; set; }
 
-        public string Stock { get; set; } = null!;
+        public int Stock { get; set; } = null!;
     }
 }
