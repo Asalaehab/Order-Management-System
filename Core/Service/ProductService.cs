@@ -13,6 +13,7 @@ namespace Service
 {
     public class ProductService(IUnitOfWork _unitOfWork, IMapper _mapper) : IProductService
     {
+        
         public void AddProduct(ProductDto productDto)
         {
             try
@@ -44,14 +45,22 @@ namespace Service
             return _mapper.Map<ProductDto>(Product);
         }
 
-        public ProductDto UpdateProduct(ProductDto productdto)
+        public ProductDto UpdateProduct(UpdateProductDto productdto,int id)
         {
-            var product = _mapper.Map<Product>(productdto);
+
+            var product = _unitOfWork.GetRepository<Product>().GetById(id);
+
+            if (product is null)
+            {
+                throw new NotImplementedException();
+            }
+            product.Name = productdto.Name;
+            product.Price= productdto.Price;
+            product.Stock = productdto.Stock;
+
             _unitOfWork.GetRepository<Product>().Update(product);
             _unitOfWork.SaveChanges();
             return _mapper.Map<ProductDto>(product);
-
-
         }
     }
 }

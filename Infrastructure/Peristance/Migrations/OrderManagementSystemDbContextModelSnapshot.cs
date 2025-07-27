@@ -40,7 +40,7 @@ namespace Peristance.Migrations
 
                     b.HasKey("CustomerId");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Invoice", b =>
@@ -62,7 +62,7 @@ namespace Peristance.Migrations
 
                     b.HasKey("InvoiceId");
 
-                    b.ToTable("Invoices");
+                    b.ToTable("Invoices", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Order", b =>
@@ -92,7 +92,7 @@ namespace Peristance.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.OrderItem", b =>
@@ -122,7 +122,7 @@ namespace Peristance.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Product", b =>
@@ -145,7 +145,7 @@ namespace Peristance.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Order", b =>

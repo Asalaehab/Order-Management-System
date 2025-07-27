@@ -14,6 +14,6 @@ namespace ServiceAbstraction
         public ProductDto GetProductById(int id);
 
         public void AddProduct(ProductDto product);
-        public ProductDto UpdateProduct(ProductDto product);
+        public ProductDto UpdateProduct(UpdateProductDto product,int id);
     }
 }

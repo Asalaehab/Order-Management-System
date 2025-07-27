@@ -37,11 +37,11 @@ namespace Presentation.Controllers
         }
 
         [HttpPut("{productId}")]
-        public ActionResult UpdateProduct(int productId, [FromBody] ProductDto product)
+        public ActionResult UpdateProduct(int productId, [FromBody] UpdateProductDto productDto)
         {
-            //var product = _serviceManger.ProductService.GetProductById(productId);
-            var productdto = _serviceManger.ProductService.UpdateProduct(product);
-            return Ok(productdto);
+            var product = _serviceManger.ProductService.UpdateProduct(productDto, productId);
+            return Ok(product);
+
         }
     }
 }

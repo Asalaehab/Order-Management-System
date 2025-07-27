@@ -14,6 +14,6 @@ namespace DomainLayer.Models
 
         public DateTime InvoiceDate { get; set; }
 
-        public int TotalAmount { get; set; }
+        public decimal TotalAmount { get; set; }
     }
 }
